@@ -10,11 +10,26 @@
 if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
 </script>
 <h1 id=msgs>PS4 5.05 FW Host v2.5 by GamerHack</h1>
+<div class="spinner" id="ldSpinner2" hidden></div>
 <hr>
 <br>
 <div id=progress>
-<h1 id=msgs2 style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Loading... Please Wait</h1>
+<h1 id=msgs2 style="font-size: 30px;margin-top: 77px;margin-bottom: 20px;">Loading... Please Wait</h1>
+<div class="spinner" id="ldSpinner1" style="margin-bottom: 415px;"></div>
 </div>
+<script>
+(function(){
+    function watch(targetId, spinId){
+        var target = document.getElementById(targetId);
+        var spin = document.getElementById(spinId);
+        function sync(){ spin.hidden = !/loading|please wait/i.test(target.textContent); }
+        new MutationObserver(sync).observe(target, {childList:true, characterData:true, subtree:true});
+        sync();
+    }
+    watch('msgs2', 'ldSpinner1');
+    watch('msgs', 'ldSpinner2');
+})();
+</script>
 <div id=menu style="display: none">
 <h1 style="font-size: 18px;color: yellow;">Main Payloads</h1>
 <button class="btn" onmouseover="msgs.innerHTML='GoldHEN v2.4b18.12 for 5.05 FW'" onmouseout="msgs.innerHTML='PS4 5.05 FW Host v2.5 by GamerHack'" onclick="load_goldhenbeta()"> GoldHEN v2.4b18.12 </button>
